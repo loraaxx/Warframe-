@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1118" />
+  <meta name="description" content="Warframe Command Center — daily planner, arsenal checkpoints, Endo priorities, account state, and progression tracking." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Warframe Command Center</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Command Center navigation">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">◇</span>
+        <div>
+          <p class="eyebrow">ORBiter OPS</p>
+          <h1>Command Center</h1>
+        </div>
+      </div>
+
+      <nav class="nav-list">
+        <button class="nav-btn active" data-view="dashboard">Dashboard</button>
+        <button class="nav-btn" data-view="planner">Daily Planner</button>
+        <button class="nav-btn" data-view="arsenal">Arsenal + Endo</button>
+        <button class="nav-btn" data-view="account">Account State</button>
+        <button class="nav-btn" data-view="intake">Screenshot Intake</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="status-dot-line"><span class="status-dot"></span><span>Local state active</span></div>
+        <button id="export-state" class="ghost-btn">Export State</button>
+        <label class="ghost-btn file-label" for="import-state">Import State</label>
+        <input id="import-state" type="file" accept="application/json,.json" hidden />
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="today-label">SESSION CONTROL</p>
+          <h2 id="view-title">Dashboard</h2>
+        </div>
+        <div class="topbar-actions">
+          <div class="mr-chip">MR <strong id="mr-display">5</strong></div>
+          <button id="reset-session" class="danger-btn">Reset Session Checks</button>
+        </div>
+      </header>
+
+      <section id="view-dashboard" class="view active" aria-labelledby="view-title">
+        <div class="hero-panel">
+          <div>
+            <p class="eyebrow">PRIMARY OUTCOME</p>
+            <h3 id="primary-outcome">Complete The Second Dream</h3>
+            <p id="live-next" class="muted">Live next step: Pre-flight Arsenal audit.</p>
+          </div>
+          <div class="hero-stat">
+            <span>Session</span>
+            <strong>6–8h</strong>
+          </div>
+        </div>
+
+        <div class="progress-panel card">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">CORE EXPEDITION</p>
+              <h3>Progress</h3>
+            </div>
+            <strong id="core-progress-text">0 / 0</strong>
+          </div>
+          <div class="progress-track"><div id="core-progress-bar" class="progress-fill"></div></div>
+        </div>
+
+        <div class="stat-grid">
+          <article class="card stat-card">
+            <p class="eyebrow">STORY</p>
+            <strong id="story-status">Neptune unlocked</strong>
+            <span>Next: The Second Dream</span>
+          </article>
+          <article class="card stat-card">
+            <p class="eyebrow">ENTRATI</p>
+            <strong><span id="standing-current">31,100</span> / <span id="standing-goal">44,000</span></strong>
+            <span><span id="standing-gap">12,900</span> to Associate</span>
+          </article>
+          <article class="card stat-card">
+            <p class="eyebrow">MAIN LOADOUT</p>
+            <strong>Wisp + Fulmin</strong>
+            <span>Panzer support</span>
+          </article>
+          <article class="card stat-card">
+            <p class="eyebrow">ENDO RULE</p>
+            <strong id="endo-headline">Split Chamber first</strong>
+            <span>Stop at verified capacity breakpoints</span>
+          </article>
+        </div>
+
+        <div class="two-col">
+          <article class="card">
+            <div class="section-head"><div><p class="eyebrow">LIVE QUEUE</p><h3>Next Actions</h3></div></div>
+            <ol id="next-actions" class="compact-list"></ol>
+          </article>
+          <article class="card">
+            <div class="section-head"><div><p class="eyebrow">ACTIVE PROJECTS</p><h3>Power Projects</h3></div></div>
+            <div id="project-list" class="project-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="view-planner" class="view">
+        <div class="section-head planner-head">
+          <div>
+            <p class="eyebrow">6–8 HOUR EXPEDITION</p>
+            <h3>Daily Planner</h3>
+          </div>
+          <div class="planner-tools">
+            <button id="check-next" class="primary-btn">Complete Next</button>
+            <button id="clear-completed" class="ghost-btn">Clear Completed</button>
+          </div>
+        </div>
+        <div id="planner-toc" class="toc-grid" aria-label="Planner sections"></div>
+        <div id="planner-phases" class="phase-stack"></div>
+      </section>
+
+      <section id="view-arsenal" class="view">
+        <div class="section-head">
+          <div><p class="eyebrow">PRE-FLIGHT + LIVE CHECKPOINTS</p><h3>Arsenal & Endo</h3></div>
+        </div>
+
+        <div class="two-col">
+          <article class="card">
+            <p class="eyebrow">CURRENT FULMIN</p>
+            <h3>Starting Layout</h3>
+            <div class="build-row"><span>TOP L→R</span><code>Split Chamber R4 | Serration R6 | Cryo Rounds R3 | Infected Clip R5</code></div>
+            <div class="build-row"><span>BOTTOM L→R</span><code>Stormbringer R3 | Point Strike R2 | Rifle Aptitude R0 | EMPTY</code></div>
+            <div class="capacity-line"><strong>56 / 60 used</strong><span>Viral + Electricity</span></div>
+          </article>
+
+          <article class="card warning-card">
+            <p class="eyebrow">POLARITY RULE</p>
+            <h3>Do Not Shuffle Blindly</h3>
+            <p>Split Chamber stays in its matching Madurai slot. When capacity breaks, remove lower-value filler before sacrificing a major polarity discount.</p>
+          </article>
+        </div>
+
+        <article class="card">
+          <div class="section-head"><div><p class="eyebrow">ENDO SPEND QUEUE</p><h3>Polarity-Aware Upgrade Ladder</h3></div></div>
+          <div id="endo-queue" class="endo-list"></div>
+        </article>
+
+        <article class="card">
+          <div class="section-head"><div><p class="eyebrow">BREAKPOINT MAP</p><h3>Exact Rearrangement Roadmap</h3></div></div>
+          <div id="breakpoint-map" class="timeline"></div>
+        </article>
+      </section>
+
+      <section id="view-account" class="view">
+        <div class="section-head">
+          <div><p class="eyebrow">CANONICAL SAVE</p><h3>Current Account State</h3></div>
+          <button id="save-account" class="primary-btn">Save Changes</button>
+        </div>
+
+        <div class="form-grid card">
+          <label>Mastery Rank<input id="field-mr" type="number" min="0" max="40" /></label>
+          <label>Entrati Standing<input id="field-standing" type="number" min="0" /></label>
+          <label>Entrati Goal<input id="field-standing-goal" type="number" min="1" /></label>
+          <label>Daily Standing Remaining<input id="field-daily-standing" type="number" min="0" /></label>
+          <label class="wide">Story checkpoint<input id="field-story" type="text" /></label>
+          <label class="wide">Next story objective<input id="field-next-story" type="text" /></label>
+        </div>
+
+        <div class="two-col">
+          <article class="card">
+            <p class="eyebrow">FRAMES</p><h3>Owned / Progress</h3>
+            <textarea id="field-frames" rows="8"></textarea>
+          </article>
+          <article class="card">
+            <p class="eyebrow">GEAR + PROJECTS</p><h3>Current Notes</h3>
+            <textarea id="field-notes" rows="8"></textarea>
+          </article>
+        </div>
+      </section>
+
+      <section id="view-intake" class="view">
+        <div class="section-head"><div><p class="eyebrow">SCREENSHOT INTAKE</p><h3>Upgrade Screen Capture</h3></div></div>
+        <div class="two-col">
+          <article class="card">
+            <label class="upload-zone" for="screenshot-input">
+              <strong>Choose a Warframe screenshot</strong>
+              <span>Upgrade screens, Standing screens, Foundry, Codex, or planner progress.</span>
+            </label>
+            <input id="screenshot-input" type="file" accept="image/*" hidden />
+            <img id="screenshot-preview" class="screenshot-preview" alt="Selected Warframe screenshot preview" hidden />
+          </article>
+          <article class="card">
+            <p class="eyebrow">MVP LIMIT</p>
+            <h3>Local App vs. AI Analysis</h3>
+            <p>This first version can capture, preview, and organize screenshots locally. Automatic mod recognition and planner rewriting needs a secure AI backend; it is intentionally not faked in this static build.</p>
+            <label class="intake-note">What changed?<textarea id="screenshot-note" rows="6" placeholder="Example: Broken War obtained; send Upgrade screen for exact build."></textarea></label>
+            <button id="save-intake-note" class="primary-btn">Add to Session Notes</button>
+          </article>
+        </div>
+        <article class="card">
+          <div class="section-head"><div><p class="eyebrow">SESSION INTAKE LOG</p><h3>Recorded Changes</h3></div></div>
+          <div id="intake-log" class="log-list"></div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>

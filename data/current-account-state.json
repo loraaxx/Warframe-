@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "updated_at": "2026-09-09",
+  "platform": "PC",
+  "mastery_rank": 5,
+  "story": {
+    "completed": [
+      "Once Awake",
+      "Heart of Deimos",
+      "The Archwing",
+      "Natah",
+      "The Duviri Paradox"
+    ],
+    "checkpoint": "Neptune unlocked; Tyl Regor defeated; Neptune Junction completed",
+    "next_primary_objective": "Complete The Second Dream"
+  },
+  "frames": [
+    {"name": "Wisp", "rank": 30, "role": "main"},
+    {"name": "Volt", "rank": 30},
+    {"name": "Excalibur", "rank": 30},
+    {"name": "Limbo", "rank": 27},
+    {"name": "Rhino", "rank": 20},
+    {"name": "Mag", "rank": 0}
+  ],
+  "loadout": {
+    "primary": "Fulmin [30]",
+    "secondary": "Dex Furis [30]",
+    "melee": "Heat Sword [30]",
+    "companion": "Panzer Vulpaphyla [30]"
+  },
+  "entrati": {
+    "rank": 2,
+    "rank_name": "Acquaintance",
+    "standing": 31100,
+    "standing_goal": 44000,
+    "daily_standing_remaining_at_last_checkpoint": 3000,
+    "project": "Reach Associate, then gild and rebuild Panzer Vulpaphyla"
+  },
+  "fulmin": {
+    "capacity_used": 56,
+    "capacity_total": 60,
+    "elements": ["Viral", "Electricity"],
+    "top_left_to_right": [
+      "Split Chamber R4",
+      "Serration R6",
+      "Cryo Rounds R3",
+      "Infected Clip R5"
+    ],
+    "bottom_left_to_right": [
+      "Stormbringer R3",
+      "Point Strike R2",
+      "Rifle Aptitude R0",
+      "EMPTY"
+    ],
+    "polarity_rule": "Keep Split Chamber in its matching Madurai slot unless a later verified build proves a better use of the slot."
+  },
+  "active_projects": [
+    "Complete The Second Dream",
+    "Broken War build checkpoint",
+    "Entrati Associate",
+    "Panzer gilding and post-gild rebuild",
+    "Xoris",
+    "Atomos",
+    "Plague Star reconnaissance"
+  ]
+}

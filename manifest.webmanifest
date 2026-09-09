@@ -1,0 +1,10 @@
+{
+  "name": "Warframe Command Center",
+  "short_name": "WF Command",
+  "description": "Daily Warframe progression planner with Arsenal, Endo, Standing and account-state tracking.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#071018",
+  "theme_color": "#0b1118",
+  "icons": []
+}
